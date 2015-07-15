@@ -1,0 +1,72 @@
+<p>hello world</p>
+<select>
+	<option value="eqlc">EQ-LC</option>
+	<option value="eqlcmc">EQ-LC&MC</option>
+	<option value="eqtp">EQ-TP</option>
+	<option value="eqmsc">EQ-M&SC</option>
+	<option value="eqbank">EQ-BANK</option>
+	<option value="eqinfra">EQ-INFRA</option>
+	<option value="eqoth">EQ-OTH</option>
+	<option value="eqmlc">EQ-MLC</option>
+	<option value="eqintl">EQ-INTL</option>
+	<option value="eqit">EQ-IT</option>
+	<option value="eqcg">EQ-CG</option>
+</select>
+<% form_for @filter do |f|%>
+ <%= f.collection_select(download_id,Download.all,:id,:category) %>
+ <%end%>
+<br></br>
+<table border="1">
+	<tr>
+		<th>id</th>
+		<th>Fund</th>
+		<th>Rating</th>
+		<th>Minimum Investment (Rs)</th>
+		<th>Exit Load (Period)</th>
+		<th>Expense Ratio</th>
+		<th>Portfolio Manager (Tenure)</th>
+		<th>1-Month Return</th>
+		<th>1-Month Rank</th>
+		<th>3-Month Return</th>
+		<th>3-Month Rank</th>
+		<th>1-Year Return</th>
+		<th>1-Year Rank</th>
+		<th>3-Year Return</th>
+		<th>3-Year Rank</th>
+		<th>5-Year Return</th>
+		<th>5-Year Rank</th>
+		<th>10-Year Return</th>
+		<th>10-Year Rank</th>
+		<th>Category</th>
+		<th>Launch</th>
+		<th>Net Assets (Cr)</th>
+	</tr>
+  <% @records.each do |record| %>
+    <tr>
+    	<td><%= record.id %></td>
+      <td><%= record.fund %></td>
+      <td><%= record.rating %></td>
+      <td><%= record.minimum_investment %></td>
+      <td><%= record.exit_load %></td>
+      <td><%= record.expense_ratio %></td>
+      <td><%= record.portfolio_manager %></td>
+      <td><%= record.one_month_return %></td>
+      <td><%= record.one_month_rank %></td>
+      <td><%= record.three_month_return %></td>
+      <td><%= record.three_month_rank %></td>
+      <td><%= record.one_year_return %></td>
+      <td><%= record.one_year_rank %></td>
+      <td><%= record.three_year_return %></td>
+      <td><%= record.three_year_rank %></td>
+      <td><%= record.five_year_return %></td>
+      <td><%= record.five_year_rank %></td>
+      <td><%= record.ten_year_return %></td>
+      	<td><%= record.ten_year_rank %></td>
+      <td><%= record.category %></td>
+      <td><%= record.launch %></td>
+      <td><%= record.net_assets %></td>
+
+      
+    </tr>
+  <% end %>
+</table>
