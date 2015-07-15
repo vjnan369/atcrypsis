@@ -1,22 +1,21 @@
 class DownloadsController < ApplicationController
   def index
-  
-  end
-  def create
-  	urls = ["https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=fees&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv", "https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=return_longterm&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv","https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=snapshot&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv" ]
-  		require 'open-uri'
-		open('ValueResearch-Fees_&_Details-2015July10.csv', 'wb') do |file|
-  	file << open(urls[0]).read
-		end
-			open('ValueResearch-Return_Overview-2015July10.csv', 'wb') do |file|
-  	file << open(urls[1]).read
-		end
-			open('ValueResearch-Snapshot-2015July10.csv', 'wb') do |file|
-  	file << open(urls[2]).read
-		end
+    Download.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
+    urls = ["https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=fees&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv", "https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=return_longterm&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv","https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=snapshot&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv" ]
+      require 'open-uri'
+    open('ValueResearch-Fees_&_Details-2015July10.csv', 'wb') do |file|
+    file << open(urls[0]).read
+    end
+      open('ValueResearch-Return_Overview-2015July10.csv', 'wb') do |file|
+    file << open(urls[1]).read
+    end
+      open('ValueResearch-Snapshot-2015July10.csv', 'wb') do |file|
+    file << open(urls[2]).read
+    end
 =begin
-		require 'csv'
-	master = CSV.read('ValueResearch-Fees_&_Details-2015July10.csv') # Reads in master
+    require 'csv'
+  master = CSV.read('ValueResearch-Fees_&_Details-2015July10.csv') # Reads in master
 master.each {|each| each.push('')} # Adds another column to all rows
 Dir.glob('*.csv').each do |each| #Goes thru all csv files
   next if each == 'ValueResearch-Fees_&_Details-2015July10.csv' # skips the master csv file
@@ -71,6 +70,13 @@ end
     end
      @records = Download.all
 
+  end
+
+
+  def create
+   # @records = Download.find(1)
+  @records = Download.first(1)
+    render 'index'
   end
 
   def filter
