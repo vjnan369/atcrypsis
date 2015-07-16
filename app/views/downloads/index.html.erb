@@ -4,6 +4,8 @@
 	<p>hello world</p>
 <%=form_tag '/downloads' do %>
 <%= text_field_tag "enter_fund_name"%>
+<label>asc</label><%= radio_button_tag "asc","select",checked=false%>
+<label>desc</label><%= radio_button_tag "desc","select",checked=false%>
 <%= submit_tag "submit"%>
 <%end%>
 <br></br>

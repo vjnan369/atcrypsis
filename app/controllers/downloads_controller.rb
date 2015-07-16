@@ -66,7 +66,14 @@ class DownloadsController < ApplicationController
   def create
    # @records = Download.find(1)
  # @records = Download.where(:fund => params[:enter_fund_name])
-    @records = Download.where("fund LIKE ?", "%#{params[:enter_fund_name]}%")
+   # @records = Download.where("fund LIKE ?", "%#{params[:enter_fund_name]}%")
+    if !params[:asc].nil?
+      @records = Download.order(minimum_investment: :asc)
+    elsif !params[:desc].nil?
+      @records = Download.order(minimum_investment: :desc)
+    else
+      @records = Download.where(:fund => params[:enter_fund_name])
+    end
     render 'index'
   end
 
