@@ -1,5 +1,6 @@
 class DownloadsController < ApplicationController
-  def index
+ 
+ def index
     Download.delete_all
     ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
     urls = ["https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=fees&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv", "https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=return_longterm&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv","https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=snapshot&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv" ]
@@ -13,23 +14,12 @@ class DownloadsController < ApplicationController
       open('ValueResearch-Snapshot-2015July10.csv', 'wb') do |file|
     file << open(urls[2]).read
     end
-=begin
-    require 'csv'
-  master = CSV.read('ValueResearch-Fees_&_Details-2015July10.csv') # Reads in master
-master.each {|each| each.push('')} # Adds another column to all rows
-Dir.glob('*.csv').each do |each| #Goes thru all csv files
-  next if each == 'ValueResearch-Fees_&_Details-2015July10.csv' # skips the master csv file
-  file = CSV.read(each) # Reads in each one
-  file.each do |line| #Goes thru each line of the file
-    temp = master.assoc(line[0]) # Finds the appropriate line in master
-    temp[-1] = line[2] if temp #updates last column if line is found
-  end
-end
-=end
+
+
+
     require 'csv'
     major = CSV.read('ValueResearch-Fees_&_Details-2015July10.csv')
     (2..13).each do |i|
-      
       major.each{|each| each.push('')}
       file = CSV.read('ValueResearch-Return_Overview-2015July10.csv')
       file.each do |line|
@@ -37,8 +27,8 @@ end
         temp[-1] = line[i]
       end
     end
+
     (2..3).each do |i|
-      
       major.each{|each| each.push('')}
       file = CSV.read('ValueResearch-Snapshot-2015July10.csv')
       file.each do |line|
@@ -46,6 +36,7 @@ end
         temp[-1] = line[i]
       end
     end
+
 
     major.each{|each| each.push('')}
       file = CSV.read('ValueResearch-Snapshot-2015July10.csv')
@@ -71,7 +62,6 @@ end
      @records = Download.all
 
   end
-
 
   def create
    # @records = Download.find(1)
