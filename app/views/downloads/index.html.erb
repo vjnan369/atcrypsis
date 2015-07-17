@@ -8,14 +8,13 @@
 <label>asc</label><%= radio_button_tag "select","asc"%>
 <label>desc</label><%= radio_button_tag "select","desc"%>
 <%= submit_tag "submit"%>
-<%=params[:choose]%>
 <br></br>
 <label>or</label>
 <br></br>
-<%= select_tag "pick",options_for_select(['Minimum Investment','Expense Ratio','1-Month Return','3-Month Return','1-Year Return','3-Year Return','5-Year Return','10-Year Return','Net Assets'])%>
+<%= select_tag "pick",options_for_select(['---select an option---','Minimum Investment','Expense Ratio','1-Month Return','3-Month Return','1-Year Return','3-Year Return','5-Year Return','10-Year Return','Net Assets'])%>
 <label>min : </label><%= text_field_tag "enter_min_value"%>
 <label>max : </label><%= text_field_tag "enter_max_value"%>
-<%= submit_tag "hello"%>
+<%= submit_tag "search"%>
 <%end%>
 <br></br>
 

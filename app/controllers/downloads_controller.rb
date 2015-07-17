@@ -233,8 +233,8 @@ class DownloadsController < ApplicationController
         else
           @records = Download.where("net_assets <= ? and net_assets >= ?",params[:enter_max_value],params[:enter_min_value]).order(net_assets: :asc)       
         end
-
-       #@records = Download.all
+      else
+       @records = Download.all
       end
     end
     render 'index'
