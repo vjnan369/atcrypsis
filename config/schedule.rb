@@ -1,6 +1,6 @@
 
-set :environment, 'development'
+set :environment, 'production'
 
-every 1.day, :at => '6:00 am' do
+every 1.minutes do
 	rake "downloader:downloading"
 end
