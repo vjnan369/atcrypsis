@@ -1,5 +1,4 @@
 class DownloadsController < ApplicationController
- autocomplete :downloads, :fund, :full => true
  def index
 
 
