@@ -28,8 +28,6 @@ gem "paperclip", "~> 4.3"
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'whenever'
-gem 'rails-jquery-autocomplete'
-# Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
