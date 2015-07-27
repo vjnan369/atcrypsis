@@ -3,7 +3,7 @@ namespace :downloader do
 	task:downloading => :environment do
     Rails.logger.info("message from task")
     Download.destroy_all
-   ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
+   #ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
 #ActiveRecord::Base.connection.reset_pk_sequene!('Download')
     urls = ["https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=fees&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv", "https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=return_longterm&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv","https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=snapshot&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv" ]
       require 'open-uri'
