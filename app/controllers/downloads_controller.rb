@@ -1,26 +1,16 @@
 class DownloadsController < ApplicationController
- 
+ autocomplete :downloads, :fund, :full => true
  def index
-    
+
+
      @records = Download.all
 
   end
 
   def create
-   # @records = Download.find(1)
- # @records = Download.where(:fund => params[:enter_fund_name])
-   # @records = Download.where("fund LIKE ?", "%#{params[:enter_fund_name]}%")
-=begin
-    if !params[:asc].nil?
-      @records = Download.where("fund LIKE ?", "%#{params[:enter_fund_name]}%").order(minimum_investment: :asc)
-    elsif !params[:desc].nil?
-      @records = Download.where("fund LIKE ?", "%#{params[:enter_fund_name]}%").order(minimum_investment: :desc)
-    else
-      @records = Download.where("fund LIKE ?", "%#{params[:enter_fund_name]}%")
-    end
-=end
 
-    if params[:commit]=="submit"  
+    # @downloads = Category.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
+    if params[:commit]=="Sort Details"  
       case params[:choose]
       when 'fund'
         if params[:select]=="asc"

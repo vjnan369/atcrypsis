@@ -1,27 +1,28 @@
-<h1>Downloads#index</h1>
-<p>Find me in app/views/downloads/index.html.erb</p>
-
-	<p>hello world</p>
+<h1 align="center">Downloads#index</h1>
+<br></br>
 <%=form_tag '/downloads' do %>
-<label>enter fund name</label><%= text_field_tag "enter_fund_name"%>
+<div class="newtab">
+<label>enter fund name:</label><%= text_field_tag "enter_fund_name"%>
 <%=select_tag "choose",options_for_select(['--sort by a column--','fund','Portfolio Manager','minimum investment','Expense ratio','net assets','1-Month Return','3-Month Return','1-Year Return','3-Year Return','5-Year Return','10-Year Return'])%>
 <label>asc</label><%= radio_button_tag "select","asc"%>
 <label>desc</label><%= radio_button_tag "select","desc"%>
-<%= submit_tag "submit"%>
-<br></br>
+<%= submit_tag "Sort Details", :class => "btn btn-primary custom"%>
+</div>
+
 <label>or</label>
-<br></br>
+<div class="newtab">
 <%= select_tag "pick",options_for_select(['---select an option---','Minimum Investment','Expense Ratio','1-Month Return','3-Month Return','1-Year Return','3-Year Return','5-Year Return','10-Year Return','Net Assets'])%>
 <label>min : </label><%= text_field_tag "enter_min_value"%>
 <label>max : </label><%= text_field_tag "enter_max_value"%>
-<%= submit_tag "search"%>
+<%= submit_tag "Search Details", :class=>"btn btn-primary custom"%>
+</div>
 <%end%>
 <br></br>
 
 
 <table border="1">
 	<tr>
-		<th>id</th>
+		<th>Id</th>
 		<th>Fund</th>
 		<th>Rating</th>
 		<th>Minimum Investment (Rs)</th>
@@ -46,7 +47,7 @@
 	</tr>
   <%@records.each do |record| %>
     <tr>
-    	<td><%= record.id %></td>
+    
       <td><%= record.fund %></td>
       <td><%= record.rating %></td>
       <td><%= record.minimum_investment %></td>
@@ -72,3 +73,13 @@
     </tr>
   <% end %>
 </table>
+<script>
+    var tables = document.getElementsByTagName('table');
+    var table = tables[tables.length -1];
+    var rows = table.rows;
+    for(var i = 1, td; i < rows.length; i++){
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(i));
+        rows[i].insertBefore(td, rows[i].firstChild);
+    }
+</script>

@@ -6,6 +6,7 @@ gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
+gem 'bootstrap-sass',       '3.2.0.0'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -28,6 +29,7 @@ gem "paperclip", "~> 4.3"
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'whenever'
+gem 'rails-jquery-autocomplete'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

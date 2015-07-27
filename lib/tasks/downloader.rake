@@ -2,8 +2,9 @@ namespace :downloader do
 	desc "download a file"
 	task:downloading => :environment do
     Rails.logger.info("message from task")
-		 Download.destroy_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
+    Download.destroy_all
+   ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
+#ActiveRecord::Base.connection.reset_pk_sequene!('Download')
     urls = ["https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=fees&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv", "https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=return_longterm&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv","https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=snapshot&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv" ]
       require 'open-uri'
     open('ValueResearch-Fees_&_Details-2015July10.csv', 'wb') do |file|
@@ -49,8 +50,40 @@ namespace :downloader do
     csv = CSV.open('output.csv','wb') #opens output csv file for writing
     major.drop(2).each {|each| csv << each}
 
+
+      counting=0
+    temp=[]
+csv = CSV.open('output2.csv','wb')
+        sam = CSV.read('output2.csv')
+        (0..21).each do |i|
+          sam.each{|each| each.push('')}
+          file = CSV.read('output.csv')
+          file.each do |line|
+          temp = major[0]
+          temp[-1] = line[i]
+          end
+        end
+=begin
+    major2 = CSV.read('output.csv')
+    csv2 = CSV.open('output2.csv','wb')
+    major2.each{|ch| csv2 << ch}
+    someone=0
+    major2.each{|ch| someone+=1}
+    puts someone
+=end
+   
+      csv = CSV.open('output2.csv','wb')
+       sam = CSV.read('output2.csv')
+    
+        (0..21).each do |i|
+         sam.each{|each| each.push('')}
+          file = CSV.read('output.csv')
+        end
+         
     csv_text = File.read('output.csv')
+    #puts File.read('output.csv').length
     csv = CSV.parse(csv_text, :headers => :true)
+    #puts CSV.parse(csv_text, :headers => :true).length
     csv.each do |row|
     Download.create!(:fund => row['Fund'],:rating => row['Rating'],:minimum_investment=>row['Minimum Investment (Rs)'],:exit_load=>row['Exit Load (Period)'],
       :expense_ratio=>row['Expense Ratio'],:portfolio_manager=>row['Portfolio Manager (Tenure)'],:one_month_return=>row['1-Month Return'],:one_month_rank=>row['1-Month Rank'],:three_month_return=>row['3-Month Return'],

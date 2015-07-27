@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'downloads#index'
   post 'filter' => 'downloads#filter'
-  resources :downloads
+  resources :downloads do
+  get :autocomplete_downloads_fund, :on => :collection
+end
+ 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
