@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'downloads#index'
-  post 'filter' => 'downloads#filter'
+  get 'downloads/filter'
   resources :downloads do
   get :autocomplete_downloads_fund, :on => :collection
 end

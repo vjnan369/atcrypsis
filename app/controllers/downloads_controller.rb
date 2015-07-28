@@ -1,8 +1,9 @@
 class DownloadsController < ApplicationController
+
  def index
-
-
-     @records = Download.all
+  @records = Download.all
+  
+  #@funding = Download.find_by(id=1)
 
   end
 
@@ -97,76 +98,76 @@ class DownloadsController < ApplicationController
       when 'Minimum Investment'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("minimum_investment <= ?",params[:enter_max_value]).order(minimum_investment: :asc)
+          @records = Download.where("fund LIKE ? and minimum_investment <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(minimum_investment: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("minimum_investment <=? and minimum_investment >= ?",params[:enter_max_value],params[:enter_min_value]).order(minimum_investment: :asc)       
+          @records = Download.where("fund LIKE ? and minimum_investment <=? and minimum_investment >= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(minimum_investment: params[:select].nil? ? :asc : params[:select])       
         end
 
         when 'Expense Ratio'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
-        if params[:enter_min_value].empty?
-          @records = Download.where("expense_ratio <= ?",params[:enter_max_value]).order(expense_ratio: :asc)
-        else
-          @records = Download.where("expense_ratio <= ? and expense_ratio >= ?",params[:enter_max_value],params[:enter_min_value]).order(expense_ratio: :asc)       
+      if params[:enter_min_value].empty?
+         @records = Download.where("fund LIKE ? and expense_ratio <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(expense_ratio: params[:select].nil? ? :asc : params[:select])
+       else
+          @records = Download.where("fund LIKE ? and expense_ratio <= ? and expense_ratio >= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(expense_ratio: params[:select].nil? ? :asc : params[:select])       
         end
 
         when '1-Month Return'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("one_month_return <= ?",params[:enter_max_value]).order(one_month_return: :asc)
+          @records = Download.where("fund LIKE ? and one_month_return <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(one_month_return: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("one_month_return <= ? and one_month_return >= ?",params[:enter_max_value],params[:enter_min_value]).order(one_month_return: :asc)       
+          @records = Download.where("fund LIKE ? and one_month_return <= ? and one_month_return >= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(one_month_return: params[:select].nil? ? :asc : params[:select])       
         end
 
         when '3-Month Return'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("three_month_return <= ?",params[:enter_max_value]).order(three_month_return: :asc)
+          @records = Download.where("fund LIKE ? and three_month_return <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(three_month_return: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("three_month_return <= ? and three_month_return >= ?",params[:enter_max_value],params[:enter_min_value]).order(three_month_return: :asc)       
+          @records = Download.where("fund LIKE ? and three_month_return <= ? and three_month_return >= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(three_month_return: params[:select].nil? ? :asc : params[:select])       
         end
 
         when '1-Year Return'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("one_year_return <= ?",params[:enter_max_value]).order(one_year_return: :asc)
+          @records = Download.where("fund LIKE ? and one_year_return <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(one_year_return: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("one_year_return <= ? and one_year_return >=?",params[:enter_max_value],params[:enter_min_value]).order(one_year_return: :asc)       
+          @records = Download.where("fund LIKE ? and one_year_return <= ? and one_year_return >=?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(one_year_return: params[:select].nil? ? :asc : params[:select])       
         end
 
         when '3-Year Return'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("three_year_return <= ?",params[:enter_max_value]).order(three_year_return: :asc)
+          @records = Download.where("fund LIKE ? and three_year_return <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(three_year_return: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("three_year_return <= ? and three_year_return >= ?",params[:enter_max_value],params[:enter_min_value]).order(three_year_return: :asc)       
+          @records = Download.where("fund LIKE ? and three_year_return <= ? and three_year_return >= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(three_year_return: params[:select].nil? ? :asc : params[:select])       
         end
 
         when '5-Year Return'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("five_year_return <= ?",params[:enter_max_value]).order(five_year_return: :asc)
+          @records = Download.where("fund LIKE ? and five_year_return <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(five_year_return: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("five_year_return <= ? and five_year_return >=?",params[:enter_max_value],params[:enter_min_value]).order(five_year_return: :asc)       
+          @records = Download.where("fund LIKE ? and five_year_return <= ? and five_year_return >=?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(five_year_return: params[:select].nil? ? :asc : params[:select])       
         end
 
         when '10-Year Return'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("ten_year_return <= ?",params[:enter_max_value]).order(ten_year_return: :asc)
+          @records = Download.where("fund LIKE ? and ten_year_return <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(ten_year_return: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("ten_year_return <= ? and ten_year_return >= ?",params[:enter_max_value],params[:enter_min_value]).order(ten_year_return: :asc)       
+          @records = Download.where("fund LIKE ? and ten_year_return <= ? and ten_year_return >= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(ten_year_return: params[:select].nil? ? :asc : params[:select])       
         end
 
         when 'Net Assets'
         #@records = Download.where("expense_ratio > ?", params[:enter_number])
         if params[:enter_min_value].empty?
-          @records = Download.where("net_assets <= ?",params[:enter_max_value]).order(net_assets: :asc)
+          @records = Download.where("fund LIKE ? and net_assets <= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value]).order(net_assets: params[:select].nil? ? :asc : params[:select])
         else
-          @records = Download.where("net_assets <= ? and net_assets >= ?",params[:enter_max_value],params[:enter_min_value]).order(net_assets: :asc)       
+          @records = Download.where("fund LIKE ? and net_assets <= ? and net_assets >= ?","%#{params[:enter_fund_name]}%",params[:enter_max_value],params[:enter_min_value]).order(net_assets: params[:select].nil? ? :asc : params[:select])       
         end
       else
-       @records = Download.all
+       @records = Download.where("fund LIKE ?", "%#{params[:enter_fund_name]}%")
       end
     end
     render 'index'

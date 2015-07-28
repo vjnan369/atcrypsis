@@ -1,28 +1,23 @@
 <h1 align="center">Downloads#index</h1>
 <br></br>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 <%=form_tag '/downloads' do %>
-<div class="newtab">
-<label>enter fund name:</label><%= text_field_tag "enter_fund_name"%>
-<%=select_tag "choose",options_for_select(['--sort by a column--','fund','Portfolio Manager','minimum investment','Expense ratio','net assets','1-Month Return','3-Month Return','1-Year Return','3-Year Return','5-Year Return','10-Year Return'])%>
-<label>asc</label><%= radio_button_tag "select","asc"%>
-<label>desc</label><%= radio_button_tag "select","desc"%>
-<%= submit_tag "Sort Details", :class => "btn btn-primary custom"%>
-</div>
 
-<label>or</label>
 <div class="newtab">
+  <label>enter fund name:</label><%= text_field_tag "enter_fund_name"%>
 <%= select_tag "pick",options_for_select(['---select an option---','Minimum Investment','Expense Ratio','1-Month Return','3-Month Return','1-Year Return','3-Year Return','5-Year Return','10-Year Return','Net Assets'])%>
 <label>min : </label><%= text_field_tag "enter_min_value"%>
 <label>max : </label><%= text_field_tag "enter_max_value"%>
+<label>asc</label><%= radio_button_tag "select","asc"%>
+<label>desc</label><%= radio_button_tag "select","desc"%>
 <%= submit_tag "Search Details", :class=>"btn btn-primary custom"%>
 </div>
-<%end%>
-<br></br>
+<%end%><br></br>
 
 
 <table border="1">
 	<tr>
-		<th>Id</th>
+		<th>Roll.No</th>
 		<th>Fund</th>
 		<th>Rating</th>
 		<th>Minimum Investment (Rs)</th>
@@ -73,6 +68,9 @@
     </tr>
   <% end %>
 </table>
+
+
+
 <script>
     var tables = document.getElementsByTagName('table');
     var table = tables[tables.length -1];

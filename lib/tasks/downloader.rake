@@ -1,29 +1,29 @@
+
 namespace :downloader do
 	desc "download a file"
 	task:downloading => :environment do
     Rails.logger.info("message from task")
     Download.destroy_all
-   #ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
-#ActiveRecord::Base.connection.reset_pk_sequene!('Download')
+   ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'downloads'")
     urls = ["https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=fees&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv", "https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=return_longterm&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv","https://www.valueresearchonline.com/funds/fundSelector/fundSelectResult.asp?funcName=snapshot&amc=&cat=equityAll&exc=susp,dir,close&schemecode=&pg=&fType=csv" ]
       require 'open-uri'
-    open('ValueResearch-Fees_&_Details-2015July10.csv', 'wb') do |file|
+    open('ValueResearch-Fees_&_Details.csv', 'wb') do |file|
     file << open(urls[0]).read
     end
-      open('ValueResearch-Return_Overview-2015July10.csv', 'wb') do |file|
+      open('ValueResearch-Return_Overview.csv', 'wb') do |file|
     file << open(urls[1]).read
     end
-      open('ValueResearch-Snapshot-2015July10.csv', 'wb') do |file|
+      open('ValueResearch-Snapshot.csv', 'wb') do |file|
     file << open(urls[2]).read
     end
 
 
 
     require 'csv'
-    major = CSV.read('ValueResearch-Fees_&_Details-2015July10.csv')
+    major = CSV.read('ValueResearch-Fees_&_Details.csv')
     (2..13).each do |i|
       major.each{|each| each.push('')}
-      file = CSV.read('ValueResearch-Return_Overview-2015July10.csv')
+      file = CSV.read('ValueResearch-Return_Overview.csv')
       file.each do |line|
         temp = major.assoc(line[0])
         temp[-1] = line[i]
@@ -32,7 +32,7 @@ namespace :downloader do
 
     (2..3).each do |i|
       major.each{|each| each.push('')}
-      file = CSV.read('ValueResearch-Snapshot-2015July10.csv')
+      file = CSV.read('ValueResearch-Snapshot.csv')
       file.each do |line|
         temp = major.assoc(line[0])
         temp[-1] = line[i]
@@ -41,7 +41,7 @@ namespace :downloader do
 
 
     major.each{|each| each.push('')}
-      file = CSV.read('ValueResearch-Snapshot-2015July10.csv')
+      file = CSV.read('ValueResearch-Snapshot.csv')
       file.each do |line|
         temp = major.assoc(line[0])
         temp[-1] = line[7]
