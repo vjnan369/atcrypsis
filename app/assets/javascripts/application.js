@@ -14,16 +14,3 @@
 //= require_tree .
 //= require autocomplete-rails
 
-//= require jquery
-//= require jquery_ujs
-
-//= require semantic-ui
-
-//= require dropzone
-
-//= require cloudinary
-//= require angular
-//= require angular-resource
-//= require app.js
-//= require_tree ./angular
-//= require_tree .
